@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import './Portfolio.css'
 
 const PHOTOS = [
@@ -25,7 +25,12 @@ const CATEGORIES = ['all', 'landscape', 'vertical']
 
 function PhotoCard({ photo, onSelect }) {
   const [loaded, setLoaded] = useState(false)
-  const cls = ['photo-item', photo.wide && 'wide', photo.vertical && 'vertical'].filter(Boolean).join(' ')
+  const cls = [
+    'photo-item',
+    photo.wide && 'wide',
+    photo.vertical && 'vertical',
+    photo.rotation && `rotate-${photo.rotation}`,
+  ].filter(Boolean).join(' ')
   const frameNumber = String(photo.id).padStart(2, '0')
 
   return (
@@ -66,15 +71,7 @@ export default function App() {
   const [active, setActive] = useState('all')
   const [selectedPhoto, setSelectedPhoto] = useState(null)
 
-  useEffect(() => {
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') setSelectedPhoto(null)
-    }
-    if (selectedPhoto) document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [selectedPhoto])
-
-  const baseOrder = (() => {
+  const baseOrder = useMemo(() => {
     const verticals = PHOTOS.filter(photo => photo.vertical)
     const horizontals = PHOTOS.filter(photo => !photo.vertical)
     const grouped = []
@@ -89,10 +86,43 @@ export default function App() {
       }
     }
     return grouped
-  })()
-  const sortedPhotos = active === 'all' ? baseOrder : baseOrder.filter(photo => photo.cat === active)
+  }, [])
+  const sortedPhotos = useMemo(() => (
+    active === 'all' ? baseOrder : baseOrder.filter(photo => photo.cat === active)
+  ), [active, baseOrder])
+  const selectedIndex = selectedPhoto ? sortedPhotos.findIndex(photo => photo.id === selectedPhoto.id) : -1
+  const selectedFrame = selectedIndex >= 0 ? String(selectedIndex + 1).padStart(2, '0') : '00'
+  const totalFrames = String(sortedPhotos.length).padStart(2, '0')
   const openPhoto = photo => setSelectedPhoto(photo)
   const closePhoto = () => setSelectedPhoto(null)
+  const showPreviousPhoto = useCallback(() => {
+    if (!selectedPhoto || sortedPhotos.length === 0) return
+    const currentIndex = selectedIndex >= 0 ? selectedIndex : 0
+    const previousIndex = (currentIndex - 1 + sortedPhotos.length) % sortedPhotos.length
+    setSelectedPhoto(sortedPhotos[previousIndex])
+  }, [selectedIndex, selectedPhoto, sortedPhotos])
+  const showNextPhoto = useCallback(() => {
+    if (!selectedPhoto || sortedPhotos.length === 0) return
+    const currentIndex = selectedIndex >= 0 ? selectedIndex : 0
+    const nextIndex = (currentIndex + 1) % sortedPhotos.length
+    setSelectedPhoto(sortedPhotos[nextIndex])
+  }, [selectedIndex, selectedPhoto, sortedPhotos])
+
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') setSelectedPhoto(null)
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        showPreviousPhoto()
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        showNextPhoto()
+      }
+    }
+    if (selectedPhoto) document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [selectedPhoto, showNextPhoto, showPreviousPhoto])
 
   return (
     <div className="portfolio">
@@ -137,12 +167,23 @@ export default function App() {
             <button type="button" className="viewer-close" onClick={closePhoto} aria-label="Close photo view">
               ×
             </button>
-            <img src={selectedPhoto.src} alt={selectedPhoto.title} />
+            <button type="button" className="viewer-nav viewer-prev" onClick={showPreviousPhoto} aria-label="View previous photo">
+              ‹
+            </button>
+            <button type="button" className="viewer-nav viewer-next" onClick={showNextPhoto} aria-label="View next photo">
+              ›
+            </button>
+            <div className="viewer-count">{selectedFrame} / {totalFrames}</div>
+            <div className="viewer-image-frame">
+              <img src={selectedPhoto.src} alt={selectedPhoto.title} />
+            </div>
             <div className="viewer-meta">
-              <p className="viewer-title">{selectedPhoto.title}</p>
-              <p className="viewer-info">
-                {selectedPhoto.film} · {selectedPhoto.cat}
-              </p>
+              <div>
+                <p className="viewer-title">{selectedPhoto.title}</p>
+                <p className="viewer-info">
+                  {selectedPhoto.film} · {selectedPhoto.cat}
+                </p>
+              </div>
               <p className="viewer-camera">Shot with {selectedPhoto.camera || 'Kodak Snapic A1'}</p>
             </div>
           </div>

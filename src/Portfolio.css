@@ -100,8 +100,9 @@
 .port-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  padding: 18px;
+  grid-auto-flow: dense;
+  gap: 22px;
+  padding: 22px;
   overflow-y: auto;
   min-height: 0;
   flex: 1;
@@ -109,18 +110,27 @@
 
 /* ── Photo cells ── */
 .photo-item {
+  --photo-tilt: 0deg;
   aspect-ratio: 4 / 3;
   overflow: visible;
   background: transparent;
 }
 
 .photo-item.wide {
-  grid-column: span 1;
-  aspect-ratio: 4 / 3;
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
 }
 
 .photo-item.vertical {
   aspect-ratio: 3 / 4;
+}
+
+.photo-item.rotate-left {
+  --photo-tilt: -0.65deg;
+}
+
+.photo-item.rotate-right {
+  --photo-tilt: 0.65deg;
 }
 
 .photo-btn {
@@ -152,6 +162,8 @@
   box-shadow:
     0 12px 26px rgba(35, 29, 20, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+  transform: rotate(var(--photo-tilt));
+  transform-origin: center;
   transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
@@ -169,7 +181,7 @@
   box-shadow:
     0 18px 34px rgba(35, 29, 20, 0.14),
     inset 0 0 0 1px rgba(255, 255, 255, 0.86);
-  transform: translateY(-3px);
+  transform: translateY(-3px) rotate(0deg);
 }
 
 .photo-image-wrap {
@@ -280,64 +292,131 @@
   inset: 0;
   display: grid;
   place-items: center;
-  background: rgba(0,0,0,0.65);
-  padding: 20px;
+  background: rgba(9, 8, 6, 0.92);
+  backdrop-filter: blur(7px);
+  padding: 24px 76px;
   z-index: 1000;
 }
 
 .viewer-shell {
   position: relative;
-  width: min(100%, 960px);
-  max-height: 90vh;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-  padding: 18px;
-  overflow: auto;
+  display: grid;
+  gap: 14px;
+  width: min(100%, 1080px);
+  max-height: 92vh;
+  color: #f5efe4;
+  overflow: visible;
 }
 
 .viewer-close {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  border: none;
-  background: none;
-  font-size: 1.8rem;
+  top: -42px;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(245, 239, 228, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 1.4rem;
   line-height: 1;
-  color: #1a1a18;
+  color: #f5efe4;
   cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.viewer-shell img {
+.viewer-close:hover,
+.viewer-close:focus-visible,
+.viewer-nav:hover,
+.viewer-nav:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.viewer-nav {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(245, 239, 228, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f5efe4;
+  cursor: pointer;
+  font-size: 2rem;
+  line-height: 1;
+  transition: background 0.2s, transform 0.2s;
+  transform: translateY(-50%);
+}
+
+.viewer-nav:hover,
+.viewer-nav:focus-visible {
+  transform: translateY(calc(-50% - 1px));
+}
+
+.viewer-prev {
+  left: -58px;
+}
+
+.viewer-next {
+  right: -58px;
+}
+
+.viewer-count {
+  justify-self: end;
+  color: rgba(245, 239, 228, 0.64);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+}
+
+.viewer-image-frame {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  max-height: 76vh;
+  padding: 12px;
+  background: #050504;
+  border: 1px solid rgba(245, 239, 228, 0.14);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.42),
+    inset 0 0 36px rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.viewer-image-frame img {
   width: 100%;
-  height: auto;
-  max-height: 75vh;
+  height: 100%;
+  max-height: calc(76vh - 24px);
   object-fit: contain;
-  border-radius: 10px;
 }
 
 .viewer-meta {
-  margin-top: 12px;
-  padding: 0 8px 8px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: end;
+  padding: 0 2px;
 }
 
 .viewer-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-style: italic;
+  font-size: 1.18rem;
   margin-bottom: 4px;
-  color: #1a1a18;
+  color: #f5efe4;
 }
 
 .viewer-info,
 .viewer-camera {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   letter-spacing: 0.08em;
-  color: #6a655b;
+  color: rgba(245, 239, 228, 0.62);
   margin: 0;
 }
 
 .viewer-camera {
-  margin-top: 4px;
+  text-align: right;
 }
 
 /* ── Footer ── */
@@ -357,6 +436,29 @@
   .photo-item.wide { grid-column: span 2; }
   .photo-item.tall { grid-row: span 1; aspect-ratio: 3 / 4; }
   .port-header { padding: 1.5rem 1rem 1rem; }
+  .photo-frame { padding: 8px; }
+  .scan-caption { font-size: 0.5rem; }
+  .photo-viewer { padding: 54px 14px 20px; }
+  .viewer-shell { gap: 10px; }
+  .viewer-close { top: -42px; }
+  .viewer-nav {
+    top: auto;
+    bottom: -50px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.6rem;
+    transform: none;
+  }
+  .viewer-nav:hover,
+  .viewer-nav:focus-visible {
+    transform: translateY(-1px);
+  }
+  .viewer-prev { left: 0; }
+  .viewer-next { right: 0; }
+  .viewer-image-frame { max-height: 68vh; padding: 8px; }
+  .viewer-image-frame img { max-height: calc(68vh - 16px); }
+  .viewer-meta { grid-template-columns: 1fr; gap: 8px; padding-bottom: 42px; }
+  .viewer-camera { text-align: left; }
 }
 
 /* ── Dark mode ── */
