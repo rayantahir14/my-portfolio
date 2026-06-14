@@ -2,22 +2,22 @@ import { useEffect, useState } from 'react'
 import './Portfolio.css'
 
 const PHOTOS = [
-  { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Sunset, Montaña de Oro", cat: "landscape", film: "Kodak Gold 200", wide: true, rotation: "left" },
-  { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Gold 200" },
-  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden hour",            cat: "people",    film: "Kodak Gold 200", rotation: "right" },
-  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Gold 200" },
-  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Gold 200" },
-  { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "street",    film: "Kodak Gold 200", vertical: true },
-  { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "street",    film: "Kodak Gold 200", vertical: true },
-  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "street",    film: "Kodak Gold 200", wide: true, rotation: "left" },
-  { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "street",    film: "Kodak Gold 200" },
-  { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "people",    film: "Kodak Gold 200" },
-  { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Kodak Gold 200" },
-  { id: 12, src: "/images/04_morro_haze.jpg",     title: "Morning haze",           cat: "landscape", film: "Kodak Gold 200" },
-  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Kodak Gold 200", rotation: "right", vertical: true },
-  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Kodak Gold 200", vertical: true },
-  { id: 15, src: "/images/10_goat.png",           title: "Fair season",            cat: "street",    film: "Kodak Gold 200", vertical: true },
-  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Gold 200" },
+  { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Sunset, Montaña de Oro", cat: "landscape", film: "Kodak Ultramax", wide: true, rotation: "left" },
+  { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax" },
+  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden hour",            cat: "people",    film: "Kodak Ultramax", rotation: "right" },
+  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax" },
+  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Ultramax" },
+  { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "street",    film: "Kodak Ultramax", wide: true, rotation: "left" },
+  { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "street",    film: "Kodak Ultramax" },
+  { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "people",    film: "Kodak Ultramax" },
+  { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
+  { id: 12, src: "/images/04_morro_haze.jpg",     title: "Morning haze",           cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
+  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
+  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
+  { id: 15, src: "/images/10_goat.png",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Ultramax", vertical: true },
 ]
 
 const CATEGORIES = ['all', 'landscape', 'street', 'people']
@@ -78,6 +78,17 @@ export default function App() {
             </button>
           ))}
         </nav>
+        <a
+          href="https://www.instagram.com/rayanshoots_/"
+          className="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Rayanshoots Instagram"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3.25A4.75 4.75 0 0 0 7.25 12 4.75 4.75 0 0 0 12 16.75 4.75 4.75 0 0 0 16.75 12 4.75 4.75 0 0 0 12 7.25zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5zm4.75-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </a>
       </header>
       <main>
         <div className="port-grid" role="list" aria-label="Photography gallery">
