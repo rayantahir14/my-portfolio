@@ -2,24 +2,24 @@ import { useEffect, useState } from 'react'
 import './Portfolio.css'
 
 const PHOTOS = [
-  { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Sunset, Montaña de Oro", cat: "landscape", film: "Kodak Ultramax", wide: true, rotation: "left" },
-  { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax" },
-  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden hour",            cat: "people",    film: "Kodak Ultramax", rotation: "right" },
-  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax" },
-  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Ultramax" },
-  { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "street",    film: "Kodak Ultramax", vertical: true },
-  { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "street",    film: "Kodak Ultramax", vertical: true },
-  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "street",    film: "Kodak Ultramax", wide: true, rotation: "left" },
-  { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "street",    film: "Kodak Ultramax" },
-  { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "people",    film: "Kodak Ultramax" },
+  { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Sunset, Montaña de Oro", cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
+  { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden hour",            cat: "people",    film: "Kodak Ultramax 400", rotation: "right" },
+  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "street",    film: "Kodak Ultramax 400", vertical: true },
+  { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "street",    film: "Kodak Ultramax 400", vertical: true },
+  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "street",    film: "Kodak Ultramax 400", wide: true, rotation: "left" },
+  { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "street",    film: "Kodak Ultramax 400" },
+  { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "people",    film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
   { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
-  { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax", vertical: true },
-  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Ultramax", vertical: true },
-  { id: 17, src: "/images/16.jpg",               title: "Sunset spill",           cat: "landscape", film: "Kodak Ultramax", vertical: true },
-  { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "landscape", film: "Kodak Ultramax", vertical: true },
-  { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "people",    film: "Kodak Ultramax", vertical: true },
+  { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax 400", vertical: true },
+  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Ultramax 400", vertical: true },
+  { id: 17, src: "/images/16.jpg",               title: "Sunset spill",           cat: "landscape", film: "Kodak Ultramax 400", vertical: true },
+  { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "landscape", film: "Kodak Ultramax 400", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "people",    film: "Kodak Ultramax 400", vertical: true },
 ]
 
 const CATEGORIES = ['all', 'landscape', 'street', 'people']
@@ -45,7 +45,7 @@ function PhotoCard({ photo, onSelect }) {
             <p className="photo-info">
               {photo.film} · {photo.cat}
             </p>
-            <p className="photo-camera">Shot with {photo.camera || '35mm camera'}</p>
+            <p className="photo-camera">Shot with {photo.camera || 'Kodak Snapic A1'}</p>
           </div>
         </div>
       </button>
@@ -65,19 +65,23 @@ export default function App() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [selectedPhoto])
 
-  const filtered = active === 'all' ? PHOTOS : PHOTOS.filter(p => p.cat === active)
-  const sortedPhotos = (() => {
-    const verticals = filtered.filter(photo => photo.vertical)
-    const horizontals = filtered.filter(photo => !photo.vertical)
+  const baseOrder = (() => {
+    const verticals = PHOTOS.filter(photo => photo.vertical)
+    const horizontals = PHOTOS.filter(photo => !photo.vertical)
     const grouped = []
     let vi = 0
     let hi = 0
     while (vi < verticals.length || hi < horizontals.length) {
-      if (vi < verticals.length) grouped.push(verticals[vi++])
-      if (hi < horizontals.length) grouped.push(horizontals[hi++])
+      for (let i = 0; i < 3 && vi < verticals.length; i += 1) {
+        grouped.push(verticals[vi++])
+      }
+      for (let i = 0; i < 3 && hi < horizontals.length; i += 1) {
+        grouped.push(horizontals[hi++])
+      }
     }
     return grouped
   })()
+  const sortedPhotos = active === 'all' ? baseOrder : baseOrder.filter(photo => photo.cat === active)
   const openPhoto = photo => setSelectedPhoto(photo)
   const closePhoto = () => setSelectedPhoto(null)
 
@@ -112,7 +116,7 @@ export default function App() {
           {sortedPhotos.map(photo => <PhotoCard key={photo.id} photo={photo} onSelect={openPhoto} />)}
         </div>
       </main>
-      <footer className="port-footer">shot on 35mm film · kodak gold 200 · san luis obispo, ca</footer>
+      <footer className="port-footer">shot on 35mm film · kodak snapic a1 · san luis obispo, ca</footer>
 
       {selectedPhoto && (
         <div className="photo-viewer" role="dialog" aria-modal="true" onClick={closePhoto}>
@@ -126,7 +130,7 @@ export default function App() {
               <p className="viewer-info">
                 {selectedPhoto.film} · {selectedPhoto.cat}
               </p>
-              <p className="viewer-camera">Shot with {selectedPhoto.camera || '35mm camera'}</p>
+              <p className="viewer-camera">Shot with {selectedPhoto.camera || 'Kodak Snapic A1'}</p>
             </div>
           </div>
         </div>
