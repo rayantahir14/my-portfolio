@@ -10,7 +10,7 @@ const PHOTOS = [
   { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
-  { id: 9,  src: "/images/19_mrfraternity.jpg",   title: "Mr Fraternity",          cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 9,  src: "/images/19_mrfraternity.jpg",   title: "Mr. Fraternity",          cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 10, src: "/images/06_friends.jpg",        title: "Good Company",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
