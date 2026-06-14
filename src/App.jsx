@@ -14,14 +14,12 @@ const PHOTOS = [
   { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
-  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
   { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 17, src: "/images/16.jpg",               title: "Sunset spill",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
 ]
-
 const CATEGORIES = ['all', 'landscape', 'vertical']
 
 function PhotoCard({ photo, onSelect }) {
