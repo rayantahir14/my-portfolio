@@ -105,7 +105,6 @@
   overflow-y: auto;
   min-height: 0;
   flex: 1;
-  grid-auto-flow: dense;
 }
 
 /* ── Photo cells ── */
@@ -116,7 +115,7 @@
 }
 
 .photo-item.wide {
-  grid-column: span 2;
+  grid-column: span 1;
   aspect-ratio: 4 / 3;
 }
 
