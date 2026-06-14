@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap');
+
+/* ── Layout ── */
+.portfolio {
+  min-height: 100vh;
+  background: #f5f2ed;
+  color: #1a1a18;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── Header ── */
+.port-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2.5rem 2rem 1.5rem;
+  border-bottom: 0.5px solid rgba(0,0,0,0.12);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.port-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: #1a1a18;
+}
+
+.port-tagline {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a7060;
+  margin-top: 2px;
+}
+
+/* ── Filters ── */
+.port-filters {
+  display: flex;
+  border: 0.5px solid rgba(0,0,0,0.2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  border-right: 0.5px solid rgba(0,0,0,0.2);
+  padding: 6px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: #7a7060;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.filter-btn:last-child { border-right: none; }
+.filter-btn:hover { background: rgba(0,0,0,0.04); }
+.filter-btn.active { background: rgba(0,0,0,0.06); color: #1a1a18; }
+
+/* ── Grid ── */
+.port-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  padding: 3px;
+}
+
+/* ── Photo cells ── */
+.photo-item {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #d8d0c4;
+}
+
+.photo-item.wide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+
+.photo-item.tall {
+  grid-row: span 2;
+  aspect-ratio: unset;
+}
+
+.photo-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-inner img,
+.photo-inner svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+  transform: rotate(0deg);
+}
+
+.photo-item.rotate-left .photo-inner img,
+.photo-item.rotate-left .photo-inner svg {
+  transform: rotate(-3deg);
+}
+
+.photo-item.rotate-right .photo-inner img,
+.photo-item.rotate-right .photo-inner svg {
+  transform: rotate(3deg);
+}
+
+.photo-item:hover .photo-inner img,
+.photo-item:hover .photo-inner svg {
+  transform: scale(1.03);
+}
+
+.photo-item.rotate-left:hover .photo-inner img,
+.photo-item.rotate-left:hover .photo-inner svg {
+  transform: scale(1.03) rotate(-3deg);
+}
+
+.photo-item.rotate-right:hover .photo-inner img,
+.photo-item.rotate-right:hover .photo-inner svg {
+  transform: scale(1.03) rotate(3deg);
+}
+
+/* ── Hover overlay ── */
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.photo-item:hover .photo-overlay { opacity: 1; }
+
+.photo-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.photo-item:hover .photo-meta { opacity: 1; }
+
+.photo-title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.photo-info {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Footer ── */
+.port-footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: #7a7060;
+  border-top: 0.5px solid rgba(0,0,0,0.12);
+  margin-top: 3px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .port-grid { grid-template-columns: repeat(2, 1fr); }
+  .photo-item.wide { grid-column: span 2; }
+  .photo-item.tall { grid-row: span 1; aspect-ratio: 3 / 4; }
+  .port-header { padding: 1.5rem 1rem 1rem; }
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  .portfolio { background: #1a1a18; color: #f0ece4; }
+  .port-name { color: #f0ece4; }
+  .port-tagline { color: #9a907e; }
+  .port-header { border-bottom-color: rgba(255,255,255,0.1); }
+  .port-filters { border-color: rgba(255,255,255,0.18); }
+  .filter-btn { border-right-color: rgba(255,255,255,0.18); color: #9a907e; }
+  .filter-btn:hover { background: rgba(255,255,255,0.05); }
+  .filter-btn.active { background: rgba(255,255,255,0.08); color: #f0ece4; }
+  .photo-item { background: #2a2820; }
+  .port-footer { color: #9a907e; border-top-color: rgba(255,255,255,0.1); }
+}
+
+.photo-skeleton {
+  position: absolute;
+  inset: 0;
+  background: #d8d0c4;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
