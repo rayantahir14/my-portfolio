@@ -2,24 +2,24 @@ import { useEffect, useState } from 'react'
 import './Portfolio.css'
 
 const PHOTOS = [
-  { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Sunset, Montaña de Oro", cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
+  { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Pirate's Cove", cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden hour",            cat: "landscape", film: "Kodak Ultramax 400", rotation: "right" },
+  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden Hour",            cat: "landscape", film: "Kodak Ultramax 400", rotation: "right" },
   { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
+  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 9,  src: "/images/19_mrfraternity.jpg",   title: "Mr Fraternity",          cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 10, src: "/images/06_friends.jpg",        title: "Friends",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
-  { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 17, src: "/images/16.jpg",               title: "Ah Louis Store",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 15, src: "/images/10_goat.jpg",           title: "SLO Ranch",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 16, src: "/images/15_theguys.jpg",        title: "The Guys",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 17, src: "/images/16.jpg",               title: "Ah Louis",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 18, src: "/images/17.jpg",               title: "Adjornment",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "Night Crew",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
 ]
 const CATEGORIES = ['all', 'landscape', 'vertical']
 
