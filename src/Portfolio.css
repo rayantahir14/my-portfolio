@@ -3,7 +3,7 @@
 /* ── Layout ── */
 .portfolio {
   min-height: 100vh;
-  background: #f5f2ed;
+  background: #ffffff;
   color: #1a1a18;
   font-family: 'DM Mono', monospace;
 }
@@ -63,16 +63,18 @@
 /* ── Grid ── */
 .port-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  padding: 3px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  grid-auto-rows: minmax(0, auto);
+  gap: 10px;
+  padding: 10px;
 }
 
 /* ── Photo cells ── */
 .photo-item {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #d8d0c4;
+  background: #f2f2f2;
 }
 
 .photo-item.wide {
@@ -82,6 +84,16 @@
 
 .photo-item.vertical {
   aspect-ratio: 3 / 4;
+}
+
+.photo-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
 }
 
 .photo-inner {
@@ -97,33 +109,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.35s ease;
-  transform: rotate(0deg);
-}
-
-.photo-item.rotate-left .photo-inner img,
-.photo-item.rotate-left .photo-inner svg {
-  transform: rotate(-3deg);
-}
-
-.photo-item.rotate-right .photo-inner img,
-.photo-item.rotate-right .photo-inner svg {
-  transform: rotate(3deg);
+  transition: transform 0.25s ease;
 }
 
 .photo-item:hover .photo-inner img,
 .photo-item:hover .photo-inner svg {
   transform: scale(1.03);
-}
-
-.photo-item.rotate-left:hover .photo-inner img,
-.photo-item.rotate-left:hover .photo-inner svg {
-  transform: scale(1.03) rotate(-3deg);
-}
-
-.photo-item.rotate-right:hover .photo-inner img,
-.photo-item.rotate-right:hover .photo-inner svg {
-  transform: scale(1.03) rotate(3deg);
 }
 
 /* ── Hover overlay ── */
@@ -161,6 +152,65 @@
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   color: rgba(255,255,255,0.65);
+}
+
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.65);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.viewer-shell {
+  position: relative;
+  width: min(100%, 960px);
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+  padding: 18px;
+  overflow: auto;
+}
+
+.viewer-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #1a1a18;
+  cursor: pointer;
+}
+
+.viewer-shell img {
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.viewer-meta {
+  margin-top: 12px;
+  padding: 0 8px 8px;
+}
+
+.viewer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: #1a1a18;
+}
+
+.viewer-info {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #6a655b;
 }
 
 /* ── Footer ── */

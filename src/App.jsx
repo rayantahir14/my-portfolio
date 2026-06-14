@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Portfolio.css'
 
 const PHOTOS = [
@@ -21,33 +21,48 @@ const PHOTOS = [
 
 const CATEGORIES = ['all', 'landscape', 'street', 'people']
 
-function PhotoCard({ photo }) {
+function PhotoCard({ photo, onSelect }) {
   const [loaded, setLoaded] = useState(false)
-  const cls = ['photo-item', photo.wide && 'wide', photo.vertical && 'vertical', photo.rotation && `rotate-${photo.rotation}`].filter(Boolean).join(' ')
+  const cls = ['photo-item', photo.wide && 'wide', photo.vertical && 'vertical'].filter(Boolean).join(' ')
   return (
     <div className={cls} role="listitem">
-      <div className="photo-inner">
-        {!loaded && <div className="photo-skeleton" />}
-        <img
-          src={photo.src}
-          alt={photo.title}
-          loading="lazy"
-          onLoad={() => setLoaded(true)}
-          style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
-        />
-        <div className="photo-overlay" aria-hidden="true" />
-        <div className="photo-meta">
-          <p className="photo-title">{photo.title}</p>
-          <p className="photo-info">{photo.film} · {photo.cat}</p>
+      <button type="button" className="photo-btn" onClick={() => onSelect(photo)} aria-label={`View ${photo.title}`}>
+        <div className="photo-inner">
+          {!loaded && <div className="photo-skeleton" />}
+          <img
+            src={photo.src}
+            alt={photo.title}
+            loading="lazy"
+            onLoad={() => setLoaded(true)}
+            style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
+          />
+          <div className="photo-overlay" aria-hidden="true" />
+          <div className="photo-meta">
+            <p className="photo-title">{photo.title}</p>
+            <p className="photo-info">{photo.film} · {photo.cat}</p>
+          </div>
         </div>
-      </div>
+      </button>
     </div>
   )
 }
 
 export default function App() {
   const [active, setActive] = useState('all')
+  const [selectedPhoto, setSelectedPhoto] = useState(null)
+
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') setSelectedPhoto(null)
+    }
+    if (selectedPhoto) document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [selectedPhoto])
+
   const filtered = active === 'all' ? PHOTOS : PHOTOS.filter(p => p.cat === active)
+  const openPhoto = photo => setSelectedPhoto(photo)
+  const closePhoto = () => setSelectedPhoto(null)
+
   return (
     <div className="portfolio">
       <header className="port-header">
@@ -65,10 +80,25 @@ export default function App() {
       </header>
       <main>
         <div className="port-grid" role="list" aria-label="Photography gallery">
-          {filtered.map(photo => <PhotoCard key={photo.id} photo={photo} />)}
+          {filtered.map(photo => <PhotoCard key={photo.id} photo={photo} onSelect={openPhoto} />)}
         </div>
       </main>
       <footer className="port-footer">shot on 35mm film · kodak gold 200 · san luis obispo, ca</footer>
+
+      {selectedPhoto && (
+        <div className="photo-viewer" role="dialog" aria-modal="true" onClick={closePhoto}>
+          <div className="viewer-shell" onClick={e => e.stopPropagation()}>
+            <button type="button" className="viewer-close" onClick={closePhoto} aria-label="Close photo view">
+              ×
+            </button>
+            <img src={selectedPhoto.src} alt={selectedPhoto.title} />
+            <div className="viewer-meta">
+              <p className="viewer-title">{selectedPhoto.title}</p>
+              <p className="viewer-info">{selectedPhoto.film} · {selectedPhoto.cat}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
