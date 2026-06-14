@@ -26,25 +26,35 @@ const CATEGORIES = ['all', 'landscape', 'vertical']
 function PhotoCard({ photo, onSelect }) {
   const [loaded, setLoaded] = useState(false)
   const cls = ['photo-item', photo.wide && 'wide', photo.vertical && 'vertical'].filter(Boolean).join(' ')
+  const frameNumber = String(photo.id).padStart(2, '0')
+
   return (
     <div className={cls} role="listitem">
       <button type="button" className="photo-btn" onClick={() => onSelect(photo)} aria-label={`View ${photo.title}`}>
         <div className="photo-inner">
-          {!loaded && <div className="photo-skeleton" />}
-          <img
-            src={photo.src}
-            alt={photo.title}
-            loading="lazy"
-            onLoad={() => setLoaded(true)}
-            style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
-          />
-          <div className="photo-overlay" aria-hidden="true" />
-          <div className="photo-meta">
-            <p className="photo-title">{photo.title}</p>
-            <p className="photo-info">
-              {photo.film} · {photo.cat}
-            </p>
-            <p className="photo-camera">Shot with {photo.camera || 'Kodak Snapic A1'}</p>
+          <div className="photo-frame">
+            <div className="photo-image-wrap">
+              {!loaded && <div className="photo-skeleton" />}
+              <img
+                src={photo.src}
+                alt={photo.title}
+                loading="lazy"
+                onLoad={() => setLoaded(true)}
+                style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.5s' }}
+              />
+              <div className="photo-overlay" aria-hidden="true" />
+              <div className="photo-meta">
+                <p className="photo-title">{photo.title}</p>
+                <p className="photo-info">
+                  {photo.film} · {photo.cat}
+                </p>
+                <p className="photo-camera">Shot with {photo.camera || 'Kodak Snapic A1'}</p>
+              </div>
+            </div>
+            <div className="scan-caption" aria-hidden="true">
+              <span>{frameNumber}</span>
+              <span>{photo.film}</span>
+            </div>
           </div>
         </div>
       </button>

@@ -110,8 +110,8 @@
 /* ── Photo cells ── */
 .photo-item {
   aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #ffffff;
+  overflow: visible;
+  background: transparent;
 }
 
 .photo-item.wide {
@@ -137,11 +137,65 @@
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.photo-inner img,
-.photo-inner svg {
+.photo-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 8px;
+  padding: 10px;
+  background: #f8f2e8;
+  border: 1px solid rgba(34, 30, 23, 0.14);
+  box-shadow:
+    0 12px 26px rgba(35, 29, 20, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.photo-frame::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(80, 64, 40, 0.05);
+  pointer-events: none;
+}
+
+.photo-item:hover .photo-frame,
+.photo-btn:focus-visible .photo-frame {
+  background: #fbf6ec;
+  box-shadow:
+    0 18px 34px rgba(35, 29, 20, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.86);
+  transform: translateY(-3px);
+}
+
+.photo-image-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #1a1a18;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.22);
+}
+
+.photo-image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 28px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+.photo-image-wrap img,
+.photo-image-wrap svg {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -149,15 +203,38 @@
   transition: transform 0.25s ease;
 }
 
-.photo-item:hover .photo-inner img,
-.photo-item:hover .photo-inner svg {
+.photo-item:hover .photo-image-wrap img,
+.photo-item:hover .photo-image-wrap svg,
+.photo-btn:focus-visible .photo-image-wrap img,
+.photo-btn:focus-visible .photo-image-wrap svg {
   transform: scale(1.03);
+}
+
+.scan-caption {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 22px;
+  color: #7a7060;
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.scan-caption span:last-child {
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ── Hover overlay ── */
 .photo-overlay {
   position: absolute;
   inset: 0;
+  z-index: 3;
   background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 55%);
   opacity: 0;
   transition: opacity 0.25s;
@@ -170,6 +247,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 4;
   padding: 1rem;
   opacity: 0;
   transition: opacity 0.25s;
@@ -291,7 +369,7 @@
   .filter-btn { border-right-color: rgba(0,0,0,0.2); color: #7a7060; }
   .filter-btn:hover { background: rgba(0,0,0,0.04); }
   .filter-btn.active { background: rgba(0,0,0,0.06); color: #1a1a18; }
-  .photo-item { background: #f2f2f2; }
+  .photo-item { background: transparent; }
   .port-footer { color: #7a7060; border-top-color: rgba(0,0,0,0.12); }
 }
 
