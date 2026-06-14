@@ -226,20 +226,32 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 12px;
-  align-items: center;
-  min-height: 22px;
+  align-items: end;
+  min-height: 28px;
   color: #7a7060;
   font-size: 0.56rem;
   letter-spacing: 0.1em;
-  line-height: 1;
+  line-height: 1.25;
   text-transform: uppercase;
 }
 
-.scan-caption span:last-child {
+.scan-details {
+  display: grid;
+  gap: 2px;
   overflow: hidden;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.scan-film,
+.scan-camera {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.scan-camera {
+  color: #9a8f7f;
 }
 
 /* ── Hover overlay ── */

@@ -4,26 +4,26 @@ import './Portfolio.css'
 const PHOTOS = [
   { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Pirate's Cove", cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden Hour",            cat: "landscape", film: "Kodak Ultramax 400", rotation: "right" },
-  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Sun Flare",             cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden Hour",            cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right" },
+  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
+  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Sun Flare",             cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 9,  src: "/images/19_mrfraternity.jpg",   title: "Mr. Fraternity",          cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 10, src: "/images/06_friends.jpg",        title: "Good Company",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
-  { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Wanderers",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
+  { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
+  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Wanderers",             cat: "vertical", film: "Kodak Ultramax 400", rotation: "right", vertical: true },
   { id: 15, src: "/images/10_goat.jpg",           title: "SLO Ranch",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 16, src: "/images/15_theguys.jpg",        title: "Saunojat",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 17, src: "/images/16.jpg",               title: "Ah Louis",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 18, src: "/images/17.jpg",               title: "Adjornment",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 19, src: "/images/18.jpg",               title: "Night Crew",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "Night Crew",            cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
 ]
 const CATEGORIES = ['all', 'landscape', 'vertical']
 
-function PhotoCard({ photo, onSelect }) {
+function PhotoCard({ photo, onSelect, frameNumber }) {
   const [loaded, setLoaded] = useState(false)
   const cls = [
     'photo-item',
@@ -31,11 +31,11 @@ function PhotoCard({ photo, onSelect }) {
     photo.vertical && 'vertical',
     photo.rotation && `rotate-${photo.rotation}`,
   ].filter(Boolean).join(' ')
-  const frameNumber = String(photo.id).padStart(2, '0')
+  const cameraName = photo.camera || 'Kodak Snapic A1'
 
   return (
     <div className={cls} role="listitem">
-      <button type="button" className="photo-btn" onClick={() => onSelect(photo)} aria-label={`View ${photo.title}`}>
+      <button type="button" className="photo-btn" onClick={() => onSelect(photo)} aria-label={`View ${photo.title}, shot with ${cameraName} on ${photo.film}`}>
         <div className="photo-inner">
           <div className="photo-frame">
             <div className="photo-image-wrap">
@@ -53,12 +53,15 @@ function PhotoCard({ photo, onSelect }) {
                 <p className="photo-info">
                   {photo.film} · {photo.cat}
                 </p>
-                <p className="photo-camera">Shot with {photo.camera || 'Kodak Snapic A1'}</p>
+                <p className="photo-camera">Shot with {cameraName}</p>
               </div>
             </div>
-            <div className="scan-caption" aria-hidden="true">
-              <span>{frameNumber}</span>
-              <span>{photo.film}</span>
+            <div className="scan-caption">
+              <span className="scan-number">{frameNumber}</span>
+              <span className="scan-details">
+                <span className="scan-film">{photo.film}</span>
+                <span className="scan-camera">{cameraName}</span>
+              </span>
             </div>
           </div>
         </div>
@@ -152,7 +155,14 @@ export default function App() {
       </header>
       <main>
         <div className="port-grid" role="list" aria-label="Photography gallery">
-          {sortedPhotos.map(photo => <PhotoCard key={photo.id} photo={photo} onSelect={openPhoto} />)}
+          {sortedPhotos.map((photo, index) => (
+            <PhotoCard
+              key={photo.id}
+              photo={photo}
+              onSelect={openPhoto}
+              frameNumber={String(index + 1).padStart(2, '0')}
+            />
+          ))}
         </div>
       </main>
       <footer className="port-footer">
