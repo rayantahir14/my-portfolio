@@ -14,7 +14,7 @@ const PHOTOS = [
   { id: 10, src: "/images/06_friends.jpg",        title: "Good Company",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach Walk",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
+  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Wanderers",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
   { id: 15, src: "/images/10_goat.jpg",           title: "SLO Ranch",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 16, src: "/images/15_theguys.jpg",        title: "Saunojat",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 17, src: "/images/16.jpg",               title: "Ah Louis",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
