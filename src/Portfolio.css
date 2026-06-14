@@ -70,7 +70,7 @@
 
 /* ── Photo cells ── */
 .photo-item {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #d8d0c4;
 }
@@ -80,9 +80,8 @@
   aspect-ratio: 16 / 9;
 }
 
-.photo-item.tall {
-  grid-row: span 2;
-  aspect-ratio: unset;
+.photo-item.vertical {
+  aspect-ratio: 3 / 4;
 }
 
 .photo-inner {
