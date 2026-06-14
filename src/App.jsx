@@ -40,7 +40,9 @@ function PhotoCard({ photo, onSelect }) {
           <div className="photo-overlay" aria-hidden="true" />
           <div className="photo-meta">
             <p className="photo-title">{photo.title}</p>
-            <p className="photo-info">{photo.film} · {photo.cat}</p>
+            <p className="photo-info">
+              {photo.film} · {photo.cat}{photo.camera ? ` · ${photo.camera}` : ''}
+            </p>
           </div>
         </div>
       </button>
@@ -61,6 +63,7 @@ export default function App() {
   }, [selectedPhoto])
 
   const filtered = active === 'all' ? PHOTOS : PHOTOS.filter(p => p.cat === active)
+  const sortedPhotos = [...filtered].sort((a, b) => (b.vertical ? 1 : 0) - (a.vertical ? 1 : 0))
   const openPhoto = photo => setSelectedPhoto(photo)
   const closePhoto = () => setSelectedPhoto(null)
 
@@ -92,7 +95,7 @@ export default function App() {
       </header>
       <main>
         <div className="port-grid" role="list" aria-label="Photography gallery">
-          {filtered.map(photo => <PhotoCard key={photo.id} photo={photo} onSelect={openPhoto} />)}
+          {sortedPhotos.map(photo => <PhotoCard key={photo.id} photo={photo} onSelect={openPhoto} />)}
         </div>
       </main>
       <footer className="port-footer">shot on 35mm film · kodak gold 200 · san luis obispo, ca</footer>
@@ -106,7 +109,9 @@ export default function App() {
             <img src={selectedPhoto.src} alt={selectedPhoto.title} />
             <div className="viewer-meta">
               <p className="viewer-title">{selectedPhoto.title}</p>
-              <p className="viewer-info">{selectedPhoto.film} · {selectedPhoto.cat}</p>
+              <p className="viewer-info">
+                {selectedPhoto.film} · {selectedPhoto.cat}{selectedPhoto.camera ? ` · ${selectedPhoto.camera}` : ''}
+              </p>
             </div>
           </div>
         </div>
