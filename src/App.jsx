@@ -6,17 +6,17 @@ const PHOTOS = [
   { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden Hour",            cat: "landscape", film: "Kodak Ultramax 400", rotation: "right" },
   { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Sun Flare",             cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 9,  src: "/images/19_mrfraternity.jpg",   title: "Mr Fraternity",          cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 10, src: "/images/06_friends.jpg",        title: "Friends",         cat: "landscape", film: "Kodak Ultramax 400" },
+  { id: 10, src: "/images/06_friends.jpg",        title: "Good Company",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
+  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach Walk",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
   { id: 15, src: "/images/10_goat.jpg",           title: "SLO Ranch",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 16, src: "/images/15_theguys.jpg",        title: "The Guys",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 16, src: "/images/15_theguys.jpg",        title: "Saunojat",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 17, src: "/images/16.jpg",               title: "Ah Louis",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 18, src: "/images/17.jpg",               title: "Adjornment",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 19, src: "/images/18.jpg",               title: "Night Crew",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
@@ -89,7 +89,7 @@ export default function App() {
       <header className="port-header">
         <div>
           <h1 className="port-name">R. Tahir</h1>
-          <p className="port-tagline">35mm · San Luis Obispo</p>
+          <p className="port-tagline">35MM FILM · San Luis Obispo</p>
         </div>
         <nav className="port-filters" aria-label="Filter by category">
           {CATEGORIES.map(cat => (
@@ -115,7 +115,11 @@ export default function App() {
           {sortedPhotos.map(photo => <PhotoCard key={photo.id} photo={photo} onSelect={openPhoto} />)}
         </div>
       </main>
-      <footer className="port-footer">shot on 35mm film · kodak snapic a1 · san luis obispo, ca</footer>
+      <footer className="port-footer">
+        shot on 35mm film · kodak snapic a1 · san luis obispo, ca
+        <br />
+        https://www.instagram.com/rayanshoots_/
+      </footer>
 
       {selectedPhoto && (
         <div className="photo-viewer" role="dialog" aria-modal="true" onClick={closePhoto}>
