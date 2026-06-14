@@ -17,6 +17,7 @@ const PHOTOS = [
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Kodak Gold 200", rotation: "right", vertical: true },
   { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Kodak Gold 200", vertical: true },
   { id: 15, src: "/images/10_goat.png",           title: "Fair season",            cat: "street",    film: "Kodak Gold 200", vertical: true },
+  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Gold 200" },
 ]
 
 const CATEGORIES = ['all', 'landscape', 'street', 'people']
