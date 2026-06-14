@@ -15,10 +15,10 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 2.5rem 2rem 1.5rem;
+  padding: 1.6rem 1.4rem 1rem;
   border-bottom: 0.5px solid rgba(0,0,0,0.12);
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .port-name {
@@ -99,10 +99,9 @@
 /* ── Grid ── */
 .port-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-flow: dense;
-  gap: 22px;
-  padding: 22px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 14px;
   overflow-y: auto;
   min-height: 0;
   flex: 1;
@@ -118,11 +117,11 @@
 
 .photo-item.wide {
   grid-column: span 2;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
 }
 
 .photo-item.vertical {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
 }
 
 .photo-item.rotate-left {
@@ -155,12 +154,12 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 8px;
-  padding: 10px;
+  gap: 5px;
+  padding: 7px;
   background: #f8f2e8;
   border: 1px solid rgba(34, 30, 23, 0.14);
   box-shadow:
-    0 12px 26px rgba(35, 29, 20, 0.08),
+    0 8px 20px rgba(35, 29, 20, 0.075),
     inset 0 0 0 1px rgba(255, 255, 255, 0.72);
   transform: rotate(var(--photo-tilt));
   transform-origin: center;
@@ -170,7 +169,7 @@
 .photo-frame::before {
   content: "";
   position: absolute;
-  inset: 5px;
+  inset: 4px;
   border: 1px solid rgba(80, 64, 40, 0.05);
   pointer-events: none;
 }
@@ -179,9 +178,9 @@
 .photo-btn:focus-visible .photo-frame {
   background: #fbf6ec;
   box-shadow:
-    0 18px 34px rgba(35, 29, 20, 0.14),
+    0 12px 26px rgba(35, 29, 20, 0.13),
     inset 0 0 0 1px rgba(255, 255, 255, 0.86);
-  transform: translateY(-3px) rotate(0deg);
+  transform: translateY(-2px) rotate(0deg);
 }
 
 .photo-image-wrap {
@@ -225,13 +224,13 @@
 .scan-caption {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 12px;
+  gap: 8px;
   align-items: end;
-  min-height: 28px;
+  min-height: 23px;
   color: #7a7060;
-  font-size: 0.56rem;
-  letter-spacing: 0.1em;
-  line-height: 1.25;
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
   text-transform: uppercase;
 }
 
@@ -272,7 +271,7 @@
   left: 0;
   right: 0;
   z-index: 4;
-  padding: 1rem;
+  padding: 0.8rem;
   opacity: 0;
   transition: opacity 0.25s;
 }
@@ -289,7 +288,7 @@
 
 .photo-info,
 .photo-camera {
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   letter-spacing: 0.08em;
   color: rgba(255,255,255,0.75);
   margin: 0;
@@ -433,7 +432,7 @@
 
 /* ── Footer ── */
 .port-footer {
-  padding: 2rem;
+  padding: 1.25rem;
   text-align: center;
   font-size: 0.68rem;
   letter-spacing: 0.1em;
@@ -443,13 +442,25 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 1100px) {
+  .port-grid { grid-template-columns: repeat(3, 1fr); }
+  .photo-item.wide {
+    grid-column: span 1;
+    aspect-ratio: 4 / 3;
+  }
+}
+
 @media (max-width: 640px) {
   .port-grid { grid-template-columns: repeat(2, 1fr); }
-  .photo-item.wide { grid-column: span 2; }
+  .photo-item.wide {
+    grid-column: span 2;
+    aspect-ratio: 3 / 2;
+  }
   .photo-item.tall { grid-row: span 1; aspect-ratio: 3 / 4; }
   .port-header { padding: 1.5rem 1rem 1rem; }
-  .photo-frame { padding: 8px; }
-  .scan-caption { font-size: 0.5rem; }
+  .port-grid { gap: 10px; padding: 10px; }
+  .photo-frame { padding: 6px; }
+  .scan-caption { font-size: 0.46rem; min-height: 21px; }
   .photo-viewer { padding: 54px 14px 20px; }
   .viewer-shell { gap: 10px; }
   .viewer-close { top: -42px; }
