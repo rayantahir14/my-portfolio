@@ -76,21 +76,16 @@ export default function App() {
 
   const baseOrder = useMemo(() => {
     const verticals = PHOTOS.filter(photo => photo.vertical)
-    const wides = PHOTOS.filter(photo => photo.wide && !photo.vertical)
-    const horizontals = PHOTOS.filter(photo => !photo.vertical && !photo.wide)
+    const horizontals = PHOTOS.filter(photo => !photo.vertical)
     const grouped = []
     let vi = 0
-    let wi = 0
     let hi = 0
 
-    while (vi < verticals.length || wi < wides.length || hi < horizontals.length) {
-      for (let i = 0; i < 2 && vi < verticals.length; i += 1) {
+    while (vi < verticals.length || hi < horizontals.length) {
+      for (let i = 0; i < 3 && vi < verticals.length; i += 1) {
         grouped.push(verticals[vi++])
       }
-      if (wi < wides.length) {
-        grouped.push(wides[wi++])
-      }
-      for (let i = 0; i < 2 && hi < horizontals.length; i += 1) {
+      for (let i = 0; i < 3 && hi < horizontals.length; i += 1) {
         grouped.push(horizontals[hi++])
       }
     }
