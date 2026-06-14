@@ -117,19 +117,19 @@
 
 .photo-item.wide {
   grid-column: span 2;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 8 / 3;
 }
 
 .photo-item.vertical {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
 }
 
 .photo-item.rotate-left {
-  --photo-tilt: -0.65deg;
+  --photo-tilt: -0.25deg;
 }
 
 .photo-item.rotate-right {
-  --photo-tilt: 0.65deg;
+  --photo-tilt: 0.25deg;
 }
 
 .photo-btn {
@@ -157,9 +157,9 @@
   gap: 5px;
   padding: 7px;
   background: #f8f2e8;
-  border: 1px solid rgba(34, 30, 23, 0.14);
+  border: 1px solid rgba(34, 30, 23, 0.11);
   box-shadow:
-    0 8px 20px rgba(35, 29, 20, 0.075),
+    0 5px 14px rgba(35, 29, 20, 0.055),
     inset 0 0 0 1px rgba(255, 255, 255, 0.72);
   transform: rotate(var(--photo-tilt));
   transform-origin: center;
@@ -170,7 +170,7 @@
   content: "";
   position: absolute;
   inset: 4px;
-  border: 1px solid rgba(80, 64, 40, 0.05);
+  border: 1px solid rgba(80, 64, 40, 0.035);
   pointer-events: none;
 }
 
@@ -178,9 +178,9 @@
 .photo-btn:focus-visible .photo-frame {
   background: #fbf6ec;
   box-shadow:
-    0 12px 26px rgba(35, 29, 20, 0.13),
+    0 9px 20px rgba(35, 29, 20, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.86);
-  transform: translateY(-2px) rotate(0deg);
+  transform: translateY(-1px) rotate(0deg);
 }
 
 .photo-image-wrap {
@@ -226,10 +226,10 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 8px;
   align-items: end;
-  min-height: 23px;
+  min-height: 22px;
   color: #7a7060;
-  font-size: 0.5rem;
-  letter-spacing: 0.08em;
+  font-size: 0.48rem;
+  letter-spacing: 0.07em;
   line-height: 1.15;
   text-transform: uppercase;
 }
@@ -454,9 +454,8 @@
   .port-grid { grid-template-columns: repeat(2, 1fr); }
   .photo-item.wide {
     grid-column: span 2;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 8 / 3;
   }
-  .photo-item.tall { grid-row: span 1; aspect-ratio: 3 / 4; }
   .port-header { padding: 1.5rem 1rem 1rem; }
   .port-grid { gap: 10px; padding: 10px; }
   .photo-frame { padding: 6px; }
