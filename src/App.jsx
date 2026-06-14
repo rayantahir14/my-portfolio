@@ -41,8 +41,9 @@ function PhotoCard({ photo, onSelect }) {
           <div className="photo-meta">
             <p className="photo-title">{photo.title}</p>
             <p className="photo-info">
-              {photo.film} · {photo.cat}{photo.camera ? ` · ${photo.camera}` : ''}
+              {photo.film} · {photo.cat}
             </p>
+            <p className="photo-camera">Shot with {photo.camera || '35mm camera'}</p>
           </div>
         </div>
       </button>
@@ -63,7 +64,17 @@ export default function App() {
   }, [selectedPhoto])
 
   const filtered = active === 'all' ? PHOTOS : PHOTOS.filter(p => p.cat === active)
-  const sortedPhotos = [...filtered].sort((a, b) => (b.vertical ? 1 : 0) - (a.vertical ? 1 : 0))
+  const priorityOrder = [7, 6, 16]
+  const sortedPhotos = [...filtered].sort((a, b) => {
+    const aPriority = priorityOrder.indexOf(a.id)
+    const bPriority = priorityOrder.indexOf(b.id)
+    if (aPriority !== -1 || bPriority !== -1) {
+      if (aPriority === -1) return 1
+      if (bPriority === -1) return -1
+      return aPriority - bPriority
+    }
+    return (b.vertical ? 1 : 0) - (a.vertical ? 1 : 0)
+  })
   const openPhoto = photo => setSelectedPhoto(photo)
   const closePhoto = () => setSelectedPhoto(null)
 
@@ -110,8 +121,9 @@ export default function App() {
             <div className="viewer-meta">
               <p className="viewer-title">{selectedPhoto.title}</p>
               <p className="viewer-info">
-                {selectedPhoto.film} · {selectedPhoto.cat}{selectedPhoto.camera ? ` · ${selectedPhoto.camera}` : ''}
+                {selectedPhoto.film} · {selectedPhoto.cat}
               </p>
+              <p className="viewer-camera">Shot with {selectedPhoto.camera || '35mm camera'}</p>
             </div>
           </div>
         </div>

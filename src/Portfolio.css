@@ -185,10 +185,16 @@
   margin-bottom: 2px;
 }
 
-.photo-info {
+.photo-info,
+.photo-camera {
   font-size: 0.65rem;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+}
+
+.photo-camera {
+  margin-top: 4px;
 }
 
 .photo-viewer {
@@ -244,10 +250,16 @@
   color: #1a1a18;
 }
 
-.viewer-info {
+.viewer-info,
+.viewer-camera {
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   color: #6a655b;
+  margin: 0;
+}
+
+.viewer-camera {
+  margin-top: 4px;
 }
 
 /* ── Footer ── */
