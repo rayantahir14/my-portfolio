@@ -4,24 +4,38 @@ import './Portfolio.css'
 const PHOTOS = [
   { id: 1,  src: "/images/11_sunset_rocks.jpg",  title: "Pirate's Cove", cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 2,  src: "/images/05_morro_rock.jpg",     title: "Morro Rock",             cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden Hour",            cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right" },
-  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
-  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Sun Flare",             cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
+  { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden Hour",            cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fujifilm QuickSnap", rotation: "right" },
+  { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fujifilm QuickSnap" },
+  { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Sun Flare",             cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fujifilm QuickSnap" },
   { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
   { id: 9,  src: "/images/19_mrfraternity.jpg",   title: "Mr. Fraternity",          cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 10, src: "/images/06_friends.jpg",        title: "Good Company",         cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
-  { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
+  { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fujifilm QuickSnap" },
+  { id: 12, src: "/images/20_leadville.jpg",      title: "Leadville",              cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fujifilm QuickSnap", vertical: true },
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Wanderers",             cat: "vertical", film: "Kodak Ultramax 400", rotation: "right", vertical: true },
   { id: 15, src: "/images/10_goat.jpg",           title: "SLO Ranch",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 16, src: "/images/15_theguys.jpg",        title: "Saunojat",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 17, src: "/images/16.jpg",               title: "Ah Louis",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
   { id: 18, src: "/images/17.jpg",               title: "Adjornment",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
-  { id: 19, src: "/images/18.jpg",               title: "Night Crew",            cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "Night Crew",            cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fujifilm QuickSnap", vertical: true },
 ]
 const CATEGORIES = ['all', 'landscape', 'vertical']
+const THEME_STORAGE_KEY = 'portfolio-theme'
+
+function getInitialTheme() {
+  if (typeof window === 'undefined') return 'light'
+
+  try {
+    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY)
+    if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
+  } catch {
+    return 'light'
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
 
 function PhotoCard({ photo, onSelect, frameNumber }) {
   const [loaded, setLoaded] = useState(false)
@@ -73,6 +87,8 @@ function PhotoCard({ photo, onSelect, frameNumber }) {
 export default function App() {
   const [active, setActive] = useState('all')
   const [selectedPhoto, setSelectedPhoto] = useState(null)
+  const [theme, setTheme] = useState(getInitialTheme)
+  const isDark = theme === 'dark'
 
   const baseOrder = useMemo(() => {
     const verticals = PHOTOS.filter(photo => photo.vertical)
@@ -99,6 +115,9 @@ export default function App() {
   const totalFrames = String(sortedPhotos.length).padStart(2, '0')
   const openPhoto = photo => setSelectedPhoto(photo)
   const closePhoto = () => setSelectedPhoto(null)
+  const toggleTheme = () => {
+    setTheme(currentTheme => currentTheme === 'dark' ? 'light' : 'dark')
+  }
   const showPreviousPhoto = useCallback(() => {
     if (!selectedPhoto || sortedPhotos.length === 0) return
     const currentIndex = selectedIndex >= 0 ? selectedIndex : 0
@@ -128,8 +147,17 @@ export default function App() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [selectedPhoto, showNextPhoto, showPreviousPhoto])
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme)
+    } catch {
+      // Theme still works for the current visit if storage is unavailable.
+    }
+  }, [theme])
+
   return (
-    <div className="portfolio">
+    <div className="portfolio" data-theme={theme}>
       <header className="port-header">
         <div>
           <h1 className="port-name">R. Tahir</h1>
@@ -142,17 +170,31 @@ export default function App() {
             </button>
           ))}
         </nav>
-        <a
-          href="https://www.instagram.com/rayanshoots_/"
-          className="social-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Rayanshoots Instagram"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3.25A4.75 4.75 0 0 0 7.25 12 4.75 4.75 0 0 0 12 16.75 4.75 4.75 0 0 0 16.75 12 4.75 4.75 0 0 0 12 7.25zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5zm4.75-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-          </svg>
-        </a>
+        <div className="header-actions">
+          <a
+            href="https://www.instagram.com/rayanshoots_/"
+            className="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Rayanshoots Instagram"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3.25A4.75 4.75 0 0 0 7.25 12 4.75 4.75 0 0 0 12 16.75 4.75 4.75 0 0 0 16.75 12 4.75 4.75 0 0 0 12 7.25zm0 1.5a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5zm4.75-.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+          </a>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-pressed={isDark}
+            aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+          >
+            <span className="theme-toggle-track" aria-hidden="true">
+              <span className="theme-toggle-thumb" />
+            </span>
+            <span className="theme-toggle-text">{isDark ? 'dark' : 'light'}</span>
+          </button>
+        </div>
       </header>
       <main>
         <div className="port-grid" role="list" aria-label="Photography gallery">
@@ -169,7 +211,9 @@ export default function App() {
       <footer className="port-footer">
         shot on 35mm film · kodak snapic a1 · san luis obispo, ca
         <br />
-        https://www.instagram.com/rayanshoots_/
+        <a href="https://www.instagram.com/rayanshoots_/" target="_blank" rel="noopener noreferrer">
+          https://www.instagram.com/rayanshoots_/
+        </a>
       </footer>
 
       {selectedPhoto && (
