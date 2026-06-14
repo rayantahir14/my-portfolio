@@ -13,11 +13,13 @@ const PHOTOS = [
   { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "street",    film: "Kodak Ultramax" },
   { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "people",    film: "Kodak Ultramax" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
-  { id: 12, src: "/images/04_morro_haze.jpg",     title: "Morning haze",           cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
   { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
-  { id: 15, src: "/images/10_goat.png",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax", vertical: true },
   { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Ultramax", vertical: true },
+  { id: 17, src: "/images/16.jpg",               title: "New photo 16",           cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 18, src: "/images/17.jpg",               title: "New photo 17",           cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "New photo 18",           cat: "street",    film: "Kodak Ultramax", vertical: true },
 ]
 
 const CATEGORIES = ['all', 'landscape', 'street', 'people']
