@@ -7,22 +7,22 @@ const PHOTOS = [
   { id: 3,  src: "/images/13_golden_hour.jpg",    title: "Golden hour",            cat: "people",    film: "Kodak Ultramax 400", rotation: "right" },
   { id: 4,  src: "/images/14_coastline.jpg",      title: "Coastline",              cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 5,  src: "/images/12_sunset_flare.jpg",   title: "Lens flare",             cat: "landscape", film: "Kodak Ultramax 400" },
-  { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "street",    film: "Kodak Ultramax 400", vertical: true },
-  { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "street",    film: "Kodak Ultramax 400", vertical: true },
-  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "street",    film: "Kodak Ultramax 400", wide: true, rotation: "left" },
-  { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "street",    film: "Kodak Ultramax 400" },
+  { id: 6,  src: "/images/01_bougainvillea.jpg",  title: "Bougainvillea",          cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 7,  src: "/images/07_polyroyale.jpg",     title: "Poly Royale",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 8,  src: "/images/09_mission.jpg",        title: "Old Mission, 1772",      cat: "landscape", film: "Kodak Ultramax 400", wide: true, rotation: "left" },
+  { id: 9,  src: "/images/08_ah_louis.jpg",       title: "Ah Louis Store",         cat: "landscape", film: "Kodak Ultramax 400" },
   { id: 10, src: "/images/06_friends.jpg",        title: "After the show",         cat: "people",    film: "Kodak Ultramax 400" },
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable" },
-  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
-  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
-  { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax 400", vertical: true },
-  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Ultramax 400", vertical: true },
-  { id: 17, src: "/images/16.jpg",               title: "Sunset spill",           cat: "landscape", film: "Kodak Ultramax 400", vertical: true },
-  { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "landscape", film: "Kodak Ultramax 400", vertical: true },
-  { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "people",    film: "Kodak Ultramax 400", vertical: true },
+  { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", rotation: "right", vertical: true },
+  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "vertical", film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
+  { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 17, src: "/images/16.jpg",               title: "Sunset spill",           cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "vertical", film: "Kodak Ultramax 400", vertical: true },
 ]
 
-const CATEGORIES = ['all', 'landscape', 'street', 'people']
+const CATEGORIES = ['all', 'landscape', 'vertical', 'people']
 
 function PhotoCard({ photo, onSelect }) {
   const [loaded, setLoaded] = useState(false)
