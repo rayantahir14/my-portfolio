@@ -17,9 +17,9 @@ const PHOTOS = [
   { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Fujicolor Superia X-TRA 400", camera: "Fuji Disposable", vertical: true },
   { id: 15, src: "/images/10_goat.jpg",           title: "Fair season",            cat: "street",    film: "Kodak Ultramax", vertical: true },
   { id: 16, src: "/images/15_theguys.jpg",        title: "The guys",               cat: "people",    film: "Kodak Ultramax", vertical: true },
-  { id: 17, src: "/images/16.jpg",               title: "New photo 16",           cat: "street",    film: "Kodak Ultramax", vertical: true },
-  { id: 18, src: "/images/17.jpg",               title: "New photo 17",           cat: "street",    film: "Kodak Ultramax", vertical: true },
-  { id: 19, src: "/images/18.jpg",               title: "New photo 18",           cat: "street",    film: "Kodak Ultramax", vertical: true },
+  { id: 17, src: "/images/16.jpg",               title: "Sunset spill",           cat: "landscape", film: "Kodak Ultramax", vertical: true },
+  { id: 18, src: "/images/17.jpg",               title: "Shoreline silhouette",  cat: "landscape", film: "Kodak Ultramax", vertical: true },
+  { id: 19, src: "/images/18.jpg",               title: "Night crew",            cat: "people",    film: "Kodak Ultramax", vertical: true },
 ]
 
 const CATEGORIES = ['all', 'landscape', 'street', 'people']
@@ -66,17 +66,18 @@ export default function App() {
   }, [selectedPhoto])
 
   const filtered = active === 'all' ? PHOTOS : PHOTOS.filter(p => p.cat === active)
-  const priorityOrder = [7, 6, 16]
-  const sortedPhotos = [...filtered].sort((a, b) => {
-    const aPriority = priorityOrder.indexOf(a.id)
-    const bPriority = priorityOrder.indexOf(b.id)
-    if (aPriority !== -1 || bPriority !== -1) {
-      if (aPriority === -1) return 1
-      if (bPriority === -1) return -1
-      return aPriority - bPriority
+  const sortedPhotos = (() => {
+    const verticals = filtered.filter(photo => photo.vertical)
+    const horizontals = filtered.filter(photo => !photo.vertical)
+    const grouped = []
+    let vi = 0
+    let hi = 0
+    while (vi < verticals.length || hi < horizontals.length) {
+      if (vi < verticals.length) grouped.push(verticals[vi++])
+      if (hi < horizontals.length) grouped.push(horizontals[hi++])
     }
-    return (b.vertical ? 1 : 0) - (a.vertical ? 1 : 0)
-  })
+    return grouped
+  })()
   const openPhoto = photo => setSelectedPhoto(photo)
   const closePhoto = () => setSelectedPhoto(null)
 
