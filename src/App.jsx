@@ -15,7 +15,7 @@ const PHOTOS = [
   { id: 11, src: "/images/03_bay_wide.jpg",       title: "Morro Bay",              cat: "landscape", film: "Kodak Gold 200" },
   { id: 12, src: "/images/04_morro_haze.jpg",     title: "Morning haze",           cat: "landscape", film: "Kodak Gold 200" },
   { id: 13, src: "/images/02_beach_walk.jpg",     title: "Beach walk",             cat: "people",    film: "Kodak Gold 200", rotation: "right", vertical: true },
-  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Kodak Gold 200" },
+  { id: 14, src: "/images/07_crowd.jpg",          title: "The crowd",              cat: "street",    film: "Kodak Gold 200", vertical: true },
   { id: 15, src: "/images/10_goat.png",           title: "Fair season",            cat: "street",    film: "Kodak Gold 200", vertical: true },
 ]
 
